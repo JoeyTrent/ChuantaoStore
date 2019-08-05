@@ -1,99 +1,57 @@
-/*导航*/
-.ct_nav {
-    width:100%;
-    padding:10px;
-    border-bottom:1px solid #ddd;
+.ct_nav{
+    width: 100%;
+    padding: 10px;
+    border-bottom:1px solid #ddd ;
 }
-.ct_nav a {
-    float:left;
-    width:33.3333%;
+.ct_nav a{
+    float: left;
+    width: 33.3%;
 }
-.ct_nav a img {
-    display:block;
-    width:100%;
+.ct_nav a img{
+    display: block;
+    width: 100%;
 }
-/*brand*/
-.ct_brand {
-
-}
-.ct_brand div a:nth-child(2n+1) {
-    width: 67.1%;
-    display:block;
-    float:left;
-}
-.ct_brand div a:nth-child(2n+1) img {
-    width:50%;
-    float:left;
-}
-.ct_brand div a:nth-child(2n) {
-    width:32.9%;
-    float:right;
-}
-.ct_brand div a:nth-child(2n) img {
-    width:100%;
-    display:block;
-}
-.ct_brand>a>img {
-    width:100%;
-    display:block;
-}
-.ct_brand ul {
-    list-style:none;
-    padding:0;
-}
-.ct_brand ul li {
-    float:left;
-    width:25%;
-}
-.ct_brand ul li img {
-    width:100%;
-    display:block;
-}
-
 /*商品*/
-.ct_product {
-    width:100%;
-    padding:0 10px;
+.ct_product{
+    width: 100%;
+    padding: 0 10px;
 }
-.ct_product .pro_item {
-    width:48%;
-    float:left;
-    margin-top:10px;
+.ct_product .pro_item{
+    width: 48%;
+    float: left;
+    margin-top: 10px;
 }
-.ct_product .pro_item:nth-child(2n) {
-    margin-left:4%;
+.ct_product .pro_item:nth-child(2n){
+    margin-left: 4%;
 }
-.ct_product .pro_item .pro_item_box {
-    width:100%;
-    min-height:200px;
+.ct_product .pro_item .pro_item_box{
+    display: block;
+    width: 100%;
+    min-height: 200px;
     box-shadow: 0 0 3px #ddd;
-    display:block;
-    text-align:center;
-    padding:10px 0;
+    text-align: center;
+    padding: 10px 0;
 }
-.ct_product .pro_item .pro_item_box img {
-    display:block;
-    width:100%;
+.ct_product .pro_item .pro_item_box img{
+    width: 100%;
+    display: block;
 }
-.ct_product .pro_item .pro_item_box p:first-of-type {
-    padding:0 10px;
-
+.ct_product .pro_item .pro_item_box p:first-of-type{
+    padding: 0 10px;
 }
-.ct_product .pro_item .pro_item_box p:last-of-type {
-    text-align:center;
+.ct_product .pro_item .pro_item_box p:last-of-type{
+    text-align: center;
 }
-.ct_product .pro_item .pro_item_box .nowPrice {
-    font-size:12px;
-    color:red;
-
+.ct_product .pro_item .pro_item_box .nowPrice{
+   font-size: 12px;
+    color: red;
 }
-.ct_product .pro_item .pro_item_box .oldPrice {
-    font-size:12px;
-    color:#ddd;
-    text-decoration:line-through;
+.ct_product .pro_item .pro_item_box .oldPrice{
+    font-size: 12px;
+    color: #ccc;
+    text-decoration: line-through;
 }
-.ct_product .pro_item .pro_item_box button {
+.ct_product .pro_item .pro_item_box .button{
     background-color: #006699;
-    color:#fff;
-    color:#fff;
+    color: #fff;
 }

@@ -12,70 +12,71 @@
     <link type="image/x-icon" rel="shortcut icon" href="images/favicon.ico">
     <link rel="stylesheet" href="assets/mui/css/mui.min.css">
     <link rel="stylesheet" href="assets/fa/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/search.css">
+    <link rel="stylesheet" href="css/category.css">
     <link rel="stylesheet" href="css/common.css">
-    <title>搜索中心</title>
+    <title>一乐</title>
 </head>
 <body>
 <div class="ct_container">
     <header class="ct_header">
         <a class="left" href="javascript:history.back();"><span class="fa fa-arrow-left"></span></a>
-        <h3>搜索中心</h3>
+        <h3>一乐云购</h3>
         <a class="right" href="search.html"><span class="fa fa-search"></span></a>
     </header>
-
     <div class="ct_content">
-        <div class="wrapper">
-          <!-- 搜索输入 -->
-          <div class="ct_search">
-              <form action="">
-                  <input type="search" placeholder=  "搜索你喜欢的商品"> 
-              </form>
-              <a href="javascript:;">搜索</a>
-          </div>
-        <!-- 搜索历史 -->
-          <div class="ct_history">
-              <div class="mui-clearfix">
-                 <span class="title">搜索历史</span>
-                 <span class="icon_clear fa fa-trash"> 清空记录</span>
-              </div>
-             
-              <ul>
-                   <li><a href="#">nike</a><span class="icon_delete fa fa-close"></span></li>
-                   <li><a href="#">耐克</a><span class="icon_delete fa fa-close"></span></li>
-              </ul>
-          </div>
-       </div>    
-    </div>
-    
-   
+        <div class="ct_wrapper">
+            <div class="mui-scroll-wrapper">
+                <div class="mui-scroll">
+                    <div class="cate_left">
+                        <ul>
+                          <!-- todo -->
+                        </ul>
+                    </div>
+                    <div class="cate_right">
+                        <ul>
+                           <!-- todo -->
+                        </ul>
+                    </div>
 
+                </div>
+            </div>
+        </div>
+    </div>
      <footer class="ct_footer">
         <a class="tab_home fa fa-home " href="index.html"><span>首页</span></a>
-        <a class="tab_cate fa fa-bars " href="category.html"><span>分类</span></a>
+        <a class="tab_cate fa fa-bars now" href="category.html"><span>分类</span></a>
         <a class="tab_cart fa fa-shopping-cart" href="cart.html"><span>购物车</span></a>
         <a class="tab_user fa fa-user" href="user/index.html"><span>会员中心</span></a>
     </footer>
 
 </div>
-<script type="text/arttemplate" id="searchTemplate">
-   <% if (data && data.length){%>
-    <div class="mui-clearfix">
-        <span class="title">搜索历史</span>
-        <span class="icon_clear fa fa-trash"> 清空记录</span>
-    </div>
-      <ul>
-        <% for(var i = data.length-1 ; i >=0 ; i --){ %>
-        <li><a data-key="<%=data[i]%>" href="javascript:;"><%=data[i]%></a><span class="icon_delete fa fa-close"></span></li>
-        <% } %>
-    </ul>
-    <% }else{ %>
-    <span class="title">没有历史记录</span>
-   <%}%>
+<script type="text/arttemplate" id="firstTemplate"> 
+
+    <% for(var i= 0 ; i < rows.length ; i ++ ){ %>
+        <li class="<%=i==0? 'now':'' %>">
+             <a href="javascript:;" data-id= "<%=rows[i].id %>">
+              <%=rows[i].categoryName%>
+             </a>
+        </li>
+    <% }  %>
+</script>
+<script type="text/arttemplate" id="secondTemplate">
+    <% if(rows.length){ %>
+    <% for(var i=0 ; i < rows.length ; i ++ ){ %>
+        <li>
+            <a href="javascript:;">
+            <img src="<%=rows[i].brandLogo%>" alt="">
+            <p><%=rows[i].brandName%></p>
+            </a>
+        </li>
+     <% }  %>
+     <% }else{%>
+      <p>当前分类没有商品品牌</p>
+     <% }%>
 </script>
 <script src="assets/mui/js/mui.min.js"></script>
 <script src="assets/zepto/zepto.min.js"></script>
 <script src="assets/artTemplate/template-native.js"></script>
-<script src='js/search.js'></script>
+<script src="js/category.js"></script>
 </body>
 </html>

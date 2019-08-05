@@ -38,6 +38,7 @@ var renderSlide = function(callback){
         data:'',
         dataType:'json',
         success:function(data){
+
             Window.slideData = data.rows;
             callback && callback(Window.slideData);
         }
@@ -50,6 +51,7 @@ var renderContent = function(parentId,callback){
         data:{id:parentId},
         dataType:'json',
         success:function(data){
+            console.log(data);
             callback && callback(data.rows);
         }
     });

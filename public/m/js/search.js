@@ -1,72 +1,78 @@
-$(function (){
-    /*显示搜索记录 若有.. 若没有*/
-    arr=JSON.parse(localStorage.getItem("history"))||[];
-    /*此处渲染页面*/
-    render(arr);
-    /*清空所有记录*/
-    clearHistory();
-    /*点击搜索按钮*/
-    btnSearch();
-    /*点击删除按钮*/
-    btnDelete();
+$(function(){
 
-});
-let arr;
-/*渲染页面*/
-let render=function () {
-    let $ul=$(".ct_content_box ul");
-    $ul.html("");
-    if(arr.length>0) {
-        $(".history").text("搜索历史记录");
-    }else{
-        $(".history").text("没有历史记录");
-    }
-    arr.forEach(function (item,i){
-        let $li="<li><a href=\"searchList.html?key="+item+"\">"+item+"</a><span data-id=\""+i+"\" class=\"delete fa fa-close\"></span></li>";
-        $ul.prepend($li);
-    });
-};
-/*点击删除按钮*/
-let btnDelete=function (){
-    $("ul").on("tap","span",function (){
-        let index=$(this).data("id");
-        console.log(arr,index);
-        arr.splice(index,1);
-        localStorage.setItem("history",JSON.stringify(arr));
-        render();
-    });
-};
-/*清空所有记录*/
-let clearHistory=function (){
-    $(".clear_history").on("tap",function (){
-        localStorage.removeItem("history");
-        arr=[];
-        render();
-    });
-};
-/*点击搜索按钮*/
-let btnSearch=function (){
-    $(".btn_search a").on("tap",function (){
-        /*弹出消息*/
-        let value=$.trim($("input").val());
-        if(!value){
-            mui.toast('请输入搜索关键字',{ duration:1000, type:'div' });
-            return false;
-        }
-        /*获取内容*/
-        setHistory(value);
-        localStorage.setItem("history",JSON.stringify(arr));
-        window.location.href="searchList.html?key="+value;
-    });
-};
-/*历史记录
-1.重复限制
-2.长度限制
-*/
-let setHistory=function (value) {
-    /*重复限制*/
-    if(arr.indexOf(value)>-1) arr.splice(arr.indexOf(value),1);
-    arr.push(value);
-    /*长度限制*/
-    if(arr.length>5) arr.shift();
-};
+	/*初始化页面 渲染历史记录*/
+	$('.ct_search input').val('');
+	$('.ct_history').html(template('searchTemplate',{data: getSearchData()}))
+
+
+
+
+
+
+
+	$('body').on('tap','.ct_search a',function(){
+		/*跳转到搜索表页*/
+		var key =$.trim($('input').val());
+		console.log(key);
+		/*判断 关键字*/
+		if(!key){
+			/* 不存在keymui 消息提示*/
+			mui.toast('请输入关键字');
+		}
+		/*增加历史记录*/
+		addSearchData(key);
+
+
+		/*跳到searchlist.html*/
+		location.href ='searchlist.html?key='+key;
+	}).on('tap','.icon_clear',function(){
+		/*清空*/
+		localStorage.clear();
+		$('.ct_history').html(template('searchTemplate',{data: getSearchData()}))
+
+	}).on('tap','.icon_delete',function(){
+		/*删除单条*/
+		removeSearchData($(this).parent().find('[data-key]').attr('data-key'));
+		$('.ct_history').html(template('searchTemplate',{data: getSearchData()}))
+
+	}).on('tap','[data-key]',function(){
+		// location.href = 
+		console.log('跳转中')
+	});
+
+
+
+})
+
+
+/*获取历史记录*/
+var  getSearchData= function(){
+	return JSON.parse(localStorage.getItem('leTaoSearchHistory')||'[]');
+}
+/*增加历史记录*/
+var addSearchData = function(key){
+	var list = getSearchData();
+	$.each(list,function(i,item){
+		if(item == key){
+			list.splice(i,1);
+		}
+	})
+	list.push(key);
+	/*最多10条记录*/
+	if(list.length > 10){
+		list.splice(0,list.length-1);
+	}
+
+	/*存进localStorage*/
+	localStorage.setItem('leTaoSearchHistory',JSON.stringify(list));
+}
+/*删除历史记录*/
+var removeSearchData = function (key){
+	var list = getSearchData();
+	$.each(list,function(i,item){
+		if(item == key){
+			list.splice(i,1);
+		}
+		localStorage.setItem('leTaoSearchHistory',JSON.stringify(list));
+	})
+}
