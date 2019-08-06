@@ -21,6 +21,7 @@ $(function(){
             if(arr[0] == 'key'){
                 /*urlcode 转码*/
                 window.proName = decodeURI(arr[1]);
+                // console.log(window.proName)
                 $('.search_input').val(window.proName);
                 break;
             }

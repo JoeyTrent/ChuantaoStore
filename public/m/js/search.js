@@ -18,13 +18,15 @@ $(function(){
 		if(!key){
 			/* 不存在keymui 消息提示*/
 			mui.toast('请输入关键字');
+			return false;
 		}
 		/*增加历史记录*/
 		addSearchData(key);
 
 
 		/*跳到searchlist.html*/
-		location.href ='searchlist.html?key='+key;
+		location.href =LeTao.SEARCH_LIST_URL+'?'+'key='+key;
+		return false;
 	}).on('tap','.icon_clear',function(){
 		/*清空*/
 		localStorage.clear();
@@ -36,8 +38,7 @@ $(function(){
 		$('.ct_history').html(template('searchTemplate',{data: getSearchData()}))
 
 	}).on('tap','[data-key]',function(){
-		// location.href = 
-		console.log('跳转中')
+		location.href= LeTao.SEARCH_LIST_URL+'?'+'key='+$(this).attr('data-key');
 	});
 
 
