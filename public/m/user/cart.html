@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0"/>
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>传智云购-购物车</title>
+    <link type="image/x-icon" rel="shortcut icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="../assets/mui/css/mui.min.css"/>
+    <link rel="stylesheet" href="../assets/fa/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="../css/common.css"/>
+    <link rel="stylesheet" href="../css/cart.css"/>
+</head>
+<body>
+<div class="ct_container">
+     <header class="ct_header">
+        <a class="left" href="javascript:history.back();"><span class="fa fa-arrow-left"></span></a>
+        <h3>一乐云购-购物车</h3>
+        <a class="right" ><span class="fa fa-refresh"></span></a>
+    </header>
+
+     <div class="ct_content">
+        <div class="ct_wrapper">
+            <div class="mui-scroll-wrapper">
+                <div class="mui-scroll">
+                    <!--TODO-->
+                        <ul  class="mui-table-view">
+                          <!-- <li data-product class="mui-table-view-cell ">
+                               <div class="mui-slider-right mui-disabled">
+                                    <a class="mui-btn mui-btn-blue " >编辑</a>
+                                    <a class="mui-btn mui-btn-red " >删除</a>
+                               </div>
+                               <a href="javacript:;" class="mui-navigate-right mui-slider-handle">
+                                   <img class="mui-media-object    mui-pull-left" src="../images/detail.jpg">
+                                   <div class="mui-media-body">
+                                       <p class="name">名字</p>
+                                       <p class="info">
+                                           <span class="price">&yen;   价格</span>
+                                           <span class="oldPrice">&   yen;老||'0.00'%></span>
+                                           <span class="number">x双   </span>
+                                       </p>
+                                       <p><span class="size">   鞋码：尺寸></span></p>
+                                   </div>
+                                   <input data-id="" type="checkbox"/>
+                               </a>
+                          </li> -->
+
+                       </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="cart_order">订单总额：&yen;<span id="cartAmount">0.00</span> <a href="javascript:;">生成订单</a></div>
+    <footer class="ct_footer">
+        <a class="tab_home fa fa-home" href="../index.html"><span>首页</span></a>
+        <a class="tab_cate fa fa-bars" href="../category.html"><span>分类</span></a>
+        <a class="tab_cart fa fa-shopping-cart now" href="cart.html"><span>购物车</span></a>
+        <a class="tab_user fa fa-user" href="index.html"><span>会员中心</span></a>
+    </footer>
+</div>
+<script type="text/template" id="cart">
+    <% for(var i = 0 ; i < data.length ; i ++){ %>
+    <% var item = data[i]; %>
+    <li data-product class="mui-table-view-cell mui-media">
+        <div class="mui-slider-right mui-disabled" data-id="<%=item.id%>">
+            <a class="mui-btn mui-btn-blue mui-icon mui-icon-compose"></a>
+            <a class="mui-btn mui-btn-red mui-icon mui-icon-trash"></a>
+        </div>
+        <div class="mui-slider-handle">
+            <a href="javascript:;" class="">
+                <%
+                var addr = '../images/none01.jpg';
+                if(item.pic && item.pic[0] && item.pic[0].picAddr){
+                    addr = item.pic[0].picAddr;
+                }
+                %>
+                <img class="mui-media-object mui-pull-left" src="<%=addr%>">
+                <div class="mui-media-body">
+                    <p class="name"><%=item.proName%></p>
+                    <p class="info">
+                        <span class="price">¥<%=item.price%></span>
+                        <span class="oldPrice">¥<%=item.oldPrice%></span>
+                        <span class="number">x<%=item.num%>双</span>
+                    </p>
+                    <p><span class="size">鞋码：<%=item.size%></span></p>
+                </div>
+                <input data-id="<%=item.id%>" type="checkbox">
+            </a>
+        </div>
+    </li>
+    <% } %>
+</script>
+<script type="text/template" id="edit">
+    <div class="cart_update">
+        <div class="p_size">
+            尺码：
+            <%
+            var itemArr = productSize.split('-');
+            for( var i = itemArr[0]; i <= itemArr[1];i++ ){
+            %>
+            <span class="btn_size <%=i==size?'now':''%>"><%=i%></span>
+            <% } %>
+        </div>
+        <div class="p_number">
+            数量：<span class="jian">-</span><input readonly type="text" value="<%=num%>" data-max="<%=productNum%>"><span class="jia">+</span>
+        </div>
+    </div>
+</script>
+
+<script src="../assets/mui/js/mui.min.js"></script>
+<script src="../assets/zepto/zepto.min.js"></script>
+<script src="../assets/artTemplate/template-native.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/cart.js"></script>
+</body>
+</html>
+

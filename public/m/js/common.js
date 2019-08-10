@@ -6,7 +6,7 @@ if(!LeTao) var LeTao = {};
 /*常用地址*/
 LeTao.LOGIN_URL = '/m/user/login.html';
 LeTao.SEARCH_LIST_URL = '/m/searchList.html';
-LeTao.CART_URL = '/m/cart.html';
+LeTao.CART_URL = '/m/user/cart.html';
 LeTao.USER_URL = '/m/user/';
 
 /*全局ajax工具函数*/
@@ -100,3 +100,30 @@ LeTao.getObjectFromId = function(arr,id){
     }
     return object;
 };
+
+
+LeTao.getItemById = function(arr,id){
+    var obj = null;
+    arr.forEach(function(item,i){
+        if(item.id == id){
+            obj = item;
+        } 
+    });
+    return obj;
+}
+
+/*将字符串 序列化为 对象*/
+LeTao.serialize2object = function (serializeStr) {
+    var obj = {};
+    /*key=value&k=v*/
+    if(serializeStr){
+        var arr = serializeStr.split('&');
+        arr.forEach(function (item,i) {
+            var itemArr = item.split('=');
+            obj[itemArr[0]] = itemArr[1];
+        })
+    }
+    return obj;
+}
+
+

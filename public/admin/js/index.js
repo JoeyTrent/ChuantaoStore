@@ -1,39 +1,103 @@
 $(function(){
-    /*1.注册人数  数据可视化*/
-    /*1.1准容器渲染图标*/
-    /*1.2准备数据 */
-    /*1.3引入核心echarts文件*/
-    /*1.4获取dom容器*/
-    var firstDom = document.querySelector('.picTable:first-child');
-    /*1.5初始化dom容器*/
-    var firstCarts = echarts.init(firstDom);
-    /*1.6进行配置和导入数据*/
+    barChart();
+    pieChart();
+});
+
+
+
+
+
+var barChart = function(){
+    var data =[
+                {
+                 name:'一月',
+                 value:300
+                },
+                {
+                 name:'二月',
+                 value:400
+                },
+                {
+                 name:'三月',
+                 value:200
+                },
+                {
+                 name:'四月',
+                 value:600
+                },
+                {
+                 name:'五月',
+                 value:700
+                }
+              ];
+var xdata = [], sdata = [];
+ data.forEach(function(item,i){
+    xdata.push(item.name);
+    sdata.push(item.value);
+});
+    var box = document.querySelector('.picTable:first-child');
+    var myCharts = echarts.init(box);
     var option = {
+        color:['hotpink'],
         /*图标的标题*/
         title: {
             text: '2017年注册人数'
         },
         tooltip: {},
         legend: {
-            data:['人数']
+            data:['注册人数']
         },
-        xAxis: {
+        xAxis: [{
             data: ["1月","2月","3月","4月","5月","6月"]
-        },
+        }],
         yAxis: {},
         series: [{
-            name: '人数',
+            name: '注册人数',
             type: 'bar',
             data: [1000, 2000, 3600, 1400, 1200, 2220]
         }]
     };
-    /*1.7 渲染图标*/
-    firstCarts.setOption(option);
+    // console.log(xdata);
+    option.xAxis[0].data = xdata;
+    option.series[0].data = sdata;
+    /*1.7 渲染*/
+    myCharts.setOption(option);
 
-    /*2.品牌销量  数据可视化*/
-    var secondDom = document.querySelector('.picTable:last-child');
-    var secondCarts = echarts.init(secondDom);
-    var secondOption = {
+}
+
+
+var pieChart = function(){
+        var data =[
+                {
+                 name:'诺基亚',
+                 value:300
+                },
+                {
+                 name:'apple',
+                 value:400
+                },
+                {
+                 name:'索尼',
+                 value:200
+                },
+                {
+                 name:'大黄蜂',
+                 value:600
+                },
+                {
+                 name:'真田',
+                 value:700
+                }
+              ];
+    var namedata = [], valuedata = [];
+    data.forEach(function(item,i){
+       namedata.push(item.name);
+       valuedata.push(item.value);
+   });
+
+    var box = document.querySelector('.picTable:last-child');
+    var myCharts = echarts.init(box);
+    var option = {
         title : {
             text: '热门品牌销售',
             subtext: '2017年6月',
@@ -43,11 +107,11 @@ $(function(){
             trigger: 'item',
             formatter: "{b} : {c} ({d}%)"
         },
-        legend: {
+        legend: [{
             orient: 'vertical',
             left: 'left',
             data: ['耐克','阿迪','百伦','安踏','李宁']
-        },
+        }],
         series : [
             {
                 name: '访问来源',
@@ -71,5 +135,26 @@ $(function(){
             }
         ]
     };
-    secondCarts.setOption(secondOption);
-})
+    option.legend[0].data = namedata;
+    console.log(option.series[0].data);
+    option.series[0].data = data;
+    myCharts.setOption(option);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -23,7 +23,7 @@ $(function () {
             var currNum = $input.val();
             /*字符串 转数字 */
             var maxNum = parseInt($input.attr('data-max'));
-            if ($(this).hasClass('jian')) {
+                if ($(this).hasClass('jian')) {
                 if(currNum == 0){
                     return false;
                 }
@@ -34,7 +34,7 @@ $(function () {
                     /*消息框点击的时候会消失 正好和加号在一块  (击穿 tap,点击穿透)*/
                     setTimeout(function () {
                         mui.toast('库存不足');
-                    },100);
+                    },300);
                     return false;
                 }
                 currNum++;
@@ -54,8 +54,9 @@ $(function () {
                 mui.toast('请您选择数量');
                 return false;
             }
+
             /*提交数据*/
-            CT.loginAjax({
+            LeTao.ajax({
                 url:'/cart/addCart',
                 type:'post',
                 data:{
@@ -73,7 +74,7 @@ $(function () {
                         /*click btn callback */
                         mui.confirm('添加成功，去购物车看看？', '温馨提示', ['是', '否'], function(e) {
                             if (e.index == 0) {
-                                location.href = CT.cartUrl;
+                                location.href = LeTao.CART_URL;
                             } else {
                                 //TODO
                             }
@@ -93,6 +94,7 @@ var getProductData = function (productId, callback) {
         },
         dataType: 'json',
         success: function (data) {
+            // console.log(data);
             setTimeout(function () {
                 callback && callback(data);
             }, 1000);
